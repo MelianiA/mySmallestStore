@@ -1,27 +1,101 @@
-<style>
-.col{
-  margin-bottom: 10px;
-}
-</style>
-
-
-<br>
+<br />
 <h3 class="text-center">All products</h3>
-<div class="body">
-    <div class="row">
 
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://getuikit.com/docs/images/light.jpg" 
-                          alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-            </div>
-           
+<button
+  type="button"
+  style="margin-bottom: 10px"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Add product
+</button>
 
+  <div class="row" >
+    <div class="col" style="margin-bottom: 10px" *ngFor="let data of dataArray">
+      <div class="card" >
+        <img
+          class="card-img-top"
+          [src]="data.image"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><b>{{data.title}}</b></h5>
+          <p class="card-text">
+            {{data.description}}
+          </p>
+        </div>
+      </div>
     </div>
+
+  </div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+
+        <form #f="ngForm" (ngSubmit)="addProduct(f)">
+          <div class="mb-3">
+            <label for="" class="form-label"></label>
+            <input
+              type="text"
+              name="title"
+              #title="ngModel" ngModel 
+              class="form-control"
+              placeholder="Title"
+              aria-describedby="helpId"
+            />
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label"></label>
+            <textarea
+              type="Description"
+              name="description"
+              #description="ngModel" ngModel 
+              class="form-control"
+              placeholder="Description"
+              aria-describedby="helpId"
+            ></textarea>
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label"></label>
+            <input
+              type="text"
+              name="image"
+              #image="ngModel" ngModel 
+              class="form-control"
+              placeholder="Image (link)"
+              aria-describedby="helpId"
+            />
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
+          <button type="submit" class="btn btn-success">Add product</button>
+          <div class="alert alert-success" role="alert" *ngIf="successMessage">
+            <strong>{{successMessage}}</strong>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
