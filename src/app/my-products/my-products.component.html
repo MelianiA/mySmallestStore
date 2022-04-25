@@ -1,93 +1,61 @@
 <br />
 <h3 class="text-center">My products</h3>
 
-<button
-  type="button"
-  style="margin-bottom: 10px"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
->
+<button type="button" style="margin-bottom: 10px" class="btn btn-primary" data-bs-toggle="modal"
+  data-bs-target="#exampleModal">
   Add product
 </button>
 
-  <div class="row" >
-    <div class="col" style="margin-bottom: 10px" *ngFor="let data of dataArray">
-      <div class="card"  *ngIf="data.uid === Uid">
-        <img
-          class="card-img-top"
-          [src]="data.image"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title"><b>{{data.title}}</b></h5>
-          <p class="card-text">
-            {{data.description}}
-          </p>
-        </div>
+<div class="row">
+  <div class="col" style="margin-bottom: 10px" *ngFor="let data of dataArray">
+    <div class="card">
+      <img class="card-img-top" [src]="data.image" alt="Card image cap" />
+      <div class="card-body">
+        <h5 class="card-title"><b>{{data.title}}</b></h5>
+        <p class="card-text">
+          {{data.description}}
+        </p>
       </div>
-    </div>
+      <div class="text-center" style="display: block;">
+        <button class="uk-button uk-button-danger uk-button-small">Delete</button>
+        <button class="uk-button uk-button-default uk-button-small">Update</button>
+      </div>
 
+    </div>
   </div>
 
+
+</div>
+
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
         <form #f="ngForm" (ngSubmit)="addProduct(f)">
           <div class="mb-3">
             <label for="" class="form-label"></label>
-            <input
-              type="text"
-              name="title"
-              #title="ngModel" ngModel 
-              class="form-control"
-              placeholder="Title"
-              aria-describedby="helpId"
-            />
+            <input type="text" name="title" #title="ngModel" ngModel class="form-control" placeholder="Title"
+              aria-describedby="helpId" />
             <small id="helpId" class="text-muted">Help text</small>
           </div>
 
           <div class="mb-3">
             <label for="" class="form-label"></label>
-            <textarea
-              type="Description"
-              name="description"
-              #description="ngModel" ngModel 
-              class="form-control"
-              placeholder="Description"
-              aria-describedby="helpId"
-            ></textarea>
+            <textarea type="Description" name="description" #description="ngModel" ngModel class="form-control"
+              placeholder="Description" aria-describedby="helpId"></textarea>
             <small id="helpId" class="text-muted">Help text</small>
           </div>
 
           <div class="mb-3">
             <label for="" class="form-label"></label>
-            <input
-              type="text"
-              name="image"
-              #image="ngModel" ngModel 
-              class="form-control"
-              placeholder="Image (link)"
-              aria-describedby="helpId"
-            />
+            <input type="text" name="image" #image="ngModel" ngModel class="form-control" placeholder="Image (link)"
+              aria-describedby="helpId" />
             <small id="helpId" class="text-muted">Help text</small>
           </div>
           <button type="submit" class="btn btn-success">Add product</button>

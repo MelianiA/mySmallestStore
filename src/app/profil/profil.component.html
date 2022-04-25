@@ -1,19 +1,95 @@
+<br />
+<article class="uk-comment uk-comment-primary">
+  <header class="uk-comment-header">
+    <div class="uk-grid-medium uk-flex-middle" uk-grid *ngIf="dataProfile != null">
+      <div class="uk-width-auto">
+        <img class="uk-comment-avatar" [src]="dataProfile.image" width="200" height="200" alt="" />
+      </div>
+      <div class="uk-width-expand">
+        <h4 class="uk-comment-title uk-margin-remove">
+          <a class="uk-link-reset" href="#"> <strong>{{ dataProfile.flName }}</strong></a>
+        </h4>
+        <button class="uk-button uk-button-default" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Update
+        </button>
 
+        <button class="uk-button uk-button-default" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          Update image
+        </button>
+         
+      </div>
+    </div>
+  </header>
+  <div class="uk-comment-body" *ngIf="dataProfile != null">
+    <p>{{ dataProfile.bio }}</p>
+  </div>
+</article>
 
-    <br/>
-    <article class="uk-comment uk-comment-primary">
-        <header class="uk-comment-header">
-            <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                    <img class="uk-comment-avatar" [src]="dataProfile.image" 
-                         width="200" height="200" alt="">
-                </div>
-                <div class="uk-width-expand">
-                    <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"> {{dataProfile.flName}}</a></h4>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  *ngIf="dataProfile != null">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <b>Edit user information</b>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm">
+          <div class="mb-3">
+            <label for="" class="form-label"></label>
+            <input type="text" name="flName" [(ngModel)]="dataProfile.flName" class="form-control" placeholder="Title"
+              aria-describedby="helpId" />
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label"></label>
+            <textarea type="Description" name="bio" [(ngModel)]="dataProfile.bio" class="form-control"
+              placeholder="Description" aria-describedby="helpId"></textarea>
+          </div>
+
+        
+          <div class="text-center">
+            <button type="submit" class="btn btn-success" (click)="update()">
+              Update profile
+            </button>
+            <div class="alert alert-success" role="alert" *ngIf="updated">
+              <strong>User updated</strong>
             </div>
-        </header>
-        <div class="uk-comment-body">
- <p>{{dataProfile.bio}}</p>
-        </div>
-    </article>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  *ngIf="dataProfile != null">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <b>Edit user information</b>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm">
+          <div class="input-group">
+            <input type="file" class="form-control" name="name" id="name" accept=".png,.jpg"
+              placeholder="Choose an image" (change)="updateImage($event)" />
+            <br />
+          </div>
+          <div class="text-center">
+            <div *ngIf="percentage | async as pct">
+              <progress id="file" max="100" value="70">{{ pct }}</progress>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
