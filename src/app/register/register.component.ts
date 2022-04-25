@@ -7,31 +7,41 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  Uid = '';
 
-  constructor(private sa:AuthService, private fs:AngularFirestore, private route: Router) { }
+  constructor(
+    private sa: AuthService,
+    private fs: AngularFirestore,
+    private route: Router
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  register(f: any) {
+    let data = f.value;
+    this.sa
+      .signUp(data.email, data.password)
+      .then((user) => {
+        this.Uid = user.user?.uid != null ? user.user?.uid : '';
+        this.fs
+          .collection('users')
+          .doc(user.user?.uid)
+          .set({
+            flName: data.flName,
+            email: data.email,
+            bio: data.bio,
+            uid: user.user?.uid,
+          })
+          .then(() => {
+            localStorage.setItem('userId', this.Uid);
+            this.route.navigate(['/']);
+          });
+      })
+      .catch(() => {
+        console.log('error !');
+      });
   }
-
-  register(f:any){
-
-    let data = f.value
-     this.sa.signUp(data.email, data.password).then((user)=>{
-        this.fs.collection("users").doc(user.user?.uid).set({
-          flName:data.flName,
-          email : data.email,
-          bio: data.bio,
-          uid: user.user?.uid
-        }).then(() => {
-          this.route.navigate(["/"])
-        })
-     }).catch(() => {
-      console.log("error !")
-     })
-
-  }
-
 }

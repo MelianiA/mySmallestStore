@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Product } from '../Models/product.model';
 
@@ -8,9 +11,8 @@ import { Product } from '../Models/product.model';
   providedIn: 'root',
 })
 export class AuthService {
-
   user;
-  Products 
+  Products;
 
   constructor(private fa: AngularFireAuth, private db: AngularFirestore) {
     this.user = this.fa.user;
@@ -25,14 +27,20 @@ export class AuthService {
   }
 
   getAllProducts() {
-    return new Promise<any>((resolve)=> {
-      this.db.collection('products').valueChanges({ idField: 'id' }).subscribe(products => resolve(products));
-      })
+    return new Promise<any>((resolve) => {
+      this.db
+        .collection('products')
+        .valueChanges({ idField: 'id' })
+        .subscribe((products) => resolve(products));
+    });
   }
 
-  getCurrentUser(Uid:string){
-    return new Promise<any>((resolve)=> {
-    this.db.collection('users', ref => ref.where('uid', '==', Uid)).valueChanges().subscribe(users => resolve(users))
-    })
-    }
+  getCurrentUser(Uid: string) {
+    return new Promise<any>((resolve) => {
+      this.db
+        .collection('users', (ref) => ref.where('uid', '==', Uid))
+        .valueChanges()
+        .subscribe((users) => resolve(users));
+    });
+  }
 }

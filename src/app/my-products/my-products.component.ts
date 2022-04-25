@@ -20,6 +20,7 @@ export class MyProductsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.dataArray = await this.as.getAllProducts();
+    console.log(this.Uid)
   }
 
   addProduct(f) {

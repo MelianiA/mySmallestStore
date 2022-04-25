@@ -9,14 +9,15 @@ import { AuthService } from '../services/auth.service';
 export class ProfilComponent implements OnInit {
   Uid;
   dataProfile;
+  dataArray;
+
   constructor(private as: AuthService) {
-    this.as.user.subscribe((user) => {
-      this.Uid = user.uid;
-    });
+    this.Uid = localStorage.getItem('userId')
+
   }
 
-  ngOnInit(): void {
-  //  let users = this.as.getCurrentUser(this.Uid)
-    console.log(this.Uid)
+  async ngOnInit() {
+    this.dataProfile = (await this.as.getCurrentUser(this.Uid))[0];
+    console.log(this.dataProfile);
   }
 }
