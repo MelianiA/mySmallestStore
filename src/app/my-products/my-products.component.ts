@@ -42,4 +42,5 @@ export class MyProductsComponent implements OnInit {
         console.log('error !');
       });
   }
+  
 }
