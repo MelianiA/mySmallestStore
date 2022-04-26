@@ -17,6 +17,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     RegisterComponent,
     ProfilComponent,
     ProductsComponent,
-    MyProductsComponent
+    MyProductsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

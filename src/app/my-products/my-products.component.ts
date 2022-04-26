@@ -11,6 +11,7 @@ export class MyProductsComponent implements OnInit {
   Uid;
   successMessage: any;
   dataArray;
+  productToUpdate;
 
   constructor(private fs: AngularFirestore, private as: AuthService) {
     this.as.user.subscribe((user) => {
@@ -41,5 +42,34 @@ export class MyProductsComponent implements OnInit {
         console.log('error !');
       });
   }
-  
+
+  async delete(id) {
+    if (confirm("Are you sure to delete this product ? ")) {
+      this.fs.collection("products").doc(id).delete()
+      this.dataArray = (await this.as.getAllProducts()).filter(elem => elem.uid === this.Uid);
+
+    }
+  }
+
+  chooseProductToUpdate(data) {
+    this.productToUpdate = data
+    console.log(this.productToUpdate)
+  }
+
+  update() {
+    this.fs
+      .collection('products')
+      .doc(this.productToUpdate.id)
+      .update({
+        title: this.productToUpdate.title,
+        description: this.productToUpdate.description,
+        image: this.productToUpdate.image,
+      })
+      .then(() => {
+        this.successMessage = "Updated";
+        window.location.reload();
+      });
+  }
+
+
 }

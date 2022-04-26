@@ -17,8 +17,9 @@
         </p>
       </div>
       <div class="text-center" style="display: block;">
-        <button class="uk-button uk-button-danger uk-button-small">Delete</button>
-        <button class="uk-button uk-button-default uk-button-small">Update</button>
+        <button class="uk-button uk-button-danger uk-button-small" (click)="delete(data.id)">Delete</button>
+        <button class="uk-button uk-button-default uk-button-small" data-bs-toggle="modal"
+                data-bs-target="#exampleModal2" (click)="chooseProductToUpdate(data)">Update</button>
       </div>
 
     </div>
@@ -42,23 +43,58 @@
             <label for="" class="form-label"></label>
             <input type="text" name="title" #title="ngModel" ngModel class="form-control" placeholder="Title"
               aria-describedby="helpId" />
-            <small id="helpId" class="text-muted">Help text</small>
           </div>
 
           <div class="mb-3">
             <label for="" class="form-label"></label>
             <textarea type="Description" name="description" #description="ngModel" ngModel class="form-control"
               placeholder="Description" aria-describedby="helpId"></textarea>
-            <small id="helpId" class="text-muted">Help text</small>
           </div>
 
           <div class="mb-3">
             <label for="" class="form-label"></label>
             <input type="text" name="image" #image="ngModel" ngModel class="form-control" placeholder="Image (link)"
               aria-describedby="helpId" />
-            <small id="helpId" class="text-muted">Help text</small>
           </div>
           <button type="submit" class="btn btn-success">Add product</button>
+          <div class="alert alert-success" role="alert" *ngIf="successMessage">
+            <strong>{{successMessage}}</strong>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update products informations</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="productToUpdate">
+
+        <form #f="ngForm" (ngSubmit)="update()">
+          <div class="mb-3">
+            <label for="" class="form-label">Title</label>
+            <input type="text" name="title"  [(ngModel)]="productToUpdate.title" class="form-control" placeholder="Title"
+              aria-describedby="helpId" />
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label">Description</label>
+            <textarea type="Description" name="description"  [(ngModel)]="productToUpdate.description" class="form-control"
+              placeholder="Description" aria-describedby="helpId"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label">Image (link)</label>
+            <input type="text" name="image" [(ngModel)]="productToUpdate.image" class="form-control" placeholder="Image (link)"
+              aria-describedby="helpId" />
+          </div>
+          <button type="submit" class="btn btn-success"  >Update product</button>
           <div class="alert alert-success" role="alert" *ngIf="successMessage">
             <strong>{{successMessage}}</strong>
           </div>
