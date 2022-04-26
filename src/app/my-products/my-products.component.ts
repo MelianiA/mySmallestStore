@@ -36,7 +36,7 @@ export class MyProductsComponent implements OnInit {
       })
       .then(() => {
         this.successMessage = 'Added !';
-        console.log(this.successMessage);
+        window.location.reload();
       })
       .catch(() => {
         console.log('error !');
