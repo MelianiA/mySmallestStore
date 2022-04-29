@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { JqueryExamplesComponent } from './jquery-examples/jquery-examples.component';
 import { LoginComponent } from './login/login.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { ProductsComponent } from './products/products.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:"profil",component:ProfilComponent, canActivate:[AuthGuardService]},
   {path:"products",component:ProductsComponent},
   {path:"myproducts",component:MyProductsComponent,canActivate:[AuthGuardService]},
+  {path:"jqueryexamples",component:JqueryExamplesComponent},
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
+import { JqueryExamplesComponent } from './jquery-examples/jquery-examples.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FooterComponent } from './footer/footer.component';
     ProfilComponent,
     ProductsComponent,
     MyProductsComponent,
-    FooterComponent
+    FooterComponent,
+    JqueryExamplesComponent
   ],
   imports: [
     BrowserModule,

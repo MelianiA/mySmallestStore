@@ -1,23 +1,22 @@
-
-
-<div class="uk-position-center uk-overlay uk-overlay-default">
+<div class="vh-100 d-flex justify-content-center align-items-center">
     <form #f="ngForm" (ngSubmit)="login(f)">
         <div class="uk-margin">
             <div class="uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: happy"></span>
-                <input class="uk-input" type="text" name="flName" #flName="ngModel" placeholder="Full name" ngModel required>
+                <input class="uk-input" type="text" name="flName" #flName="ngModel" placeholder="Full name" ngModel
+                    required>
             </div>
             <p class="text-danger" *ngIf="flName.errors?.required && flName.touched">Full name name is required</p>
         </div>
-    
+
         <div class="uk-margin">
             <div class="uk-inline">
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                <input class="uk-input" type="password"  name="password" #password="ngModel" ngModel 
-                         placeholder="Password" required 
-                        minlength="8">
-                  <p class="text-danger" *ngIf="password.errors?.required && password.touched">Password is required</p>
-                  <p class="text-danger" *ngIf="password.errors?.minlength && password.touched">Password should compose > 8 caracters</p>
+                <input class="uk-input" type="password" name="password" #password="ngModel" ngModel
+                    placeholder="Password" required minlength="8">
+                <p class="text-danger" *ngIf="password.errors?.required && password.touched">Password is required</p>
+                <p class="text-danger" *ngIf="password.errors?.minlength && password.touched">Password should compose >
+                    8 caracters</p>
             </div>
         </div>
 
@@ -25,5 +24,5 @@
         <button class="btn btn-outline-primary" type="submit" style="width: 100%;">forgot password</button>
     </form>
     <p class="text-center" style="color: red;">{{messageError}}</p>
-    
+
 </div>
